@@ -49,7 +49,11 @@ class JsonParser extends CstParser {
   // invoking RULE(...)
   // see: https://github.com/jeffmo/es-class-fields-and-static-properties
   constructor() {
-    super(allTokens)
+    super(allTokens, {
+      maxLookahead: 1,
+      recoveryEnabled: true,
+      nodeLocationTracking: "full"
+    })
 
     // not mandatory, using $ (or any other sign) to reduce verbosity (this. this. this. this. .......)
     const $ = this
@@ -65,9 +69,10 @@ class JsonParser extends CstParser {
     $.RULE("object", () => {
       $.CONSUME(LCurly)
       $.OPTION(() => {
-        $.SUBRULE($.objectItem)
         $.MANY(() => {
-          $.CONSUME(Comma)
+          $.OPTION2(() => {
+            $.CONSUME2(Comma)
+          })
           $.SUBRULE2($.objectItem)
         })
       })
