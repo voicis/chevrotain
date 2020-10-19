@@ -2,13 +2,16 @@
   "name": "chevrotain_examples_grammars",
   "version": "7.0.1",
   "scripts": {
-    "test": "mocha \"!(node_modules)/**/*spec.js\""
+    "test": "mocha \"!(node_modules)/**/*spec.js\"",
+    "build": "webpack"
   },
   "dependencies": {
     "chevrotain": "^7.0.1"
   },
   "devDependencies": {
     "acorn": "^7.0.0",
+    "webpack": "^4",
+    "webpack-cli": "^4",
     "xregexp": "^4.2.0"
   },
   "private": true
